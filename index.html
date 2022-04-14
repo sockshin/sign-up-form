@@ -85,7 +85,7 @@
 
 <script>
 
-
+let confirmedInputFocusOut = false;
 let reqsMet;
     let passwordCompleted = false; //has used entered password field and exited
 /*password input field event listeners */
@@ -95,23 +95,27 @@ let reqsMet;
     let confirmPasswordElement = document.getElementById('confirm_password')
     document.getElementById('confirm_password').addEventListener('focusout', confirmPassword)
     document.getElementById('confirm_password').addEventListener('keyup', confirmPasswordComplete)
+
+
 /* runs when confirm password input box focusout */    
     function confirmPassword() {
+        confirmedInputFocusOut = true;
         let passwordText = document.getElementById('password').value
         let confirmPasswordText = document.getElementById('confirm_password').value
         let passwordMatch = document.getElementById('password_match')
         if( passwordText === confirmPasswordText && reqsMet == 5){ 
             pwPass(passwordMatch)
             passwordMatch.textContent = "Passwords Match!"
+            confirmedInputFocusOut = true;
         }else if (reqsMet < 5 && passwordCompleted == true){
             pwFail(passwordMatch)
             passwordMatch.textContent = "Password Requirements Not Met"
-
         }            
-        else{
+        else if (confirmedInputFocusOut == true){
             pwFail(passwordMatch) 
             passwordMatch.textContent = "Passwords Do Not Match"            
         }
+
     }
 
 /* add and remove classes for confirm password innput box */
@@ -132,12 +136,10 @@ let reqsMet;
 
 /* checks confirm password input to alert when passwords match - on keyup*/
     function confirmPasswordComplete() {
-
-
         let passwordText = document.getElementById('password').value 
         let confirmPasswordText = document.getElementById('confirm_password').value
         let passwordMatch = document.getElementById('password_match')
-        if( passwordText === confirmPasswordText || passwordCompleted == true && reqsMet == 5){  //user pw matches or user exited password field AND all 5 reqs met
+        if( passwordText === confirmPasswordText || passwordCompleted == true && reqsMet == 5 && confirmedInputFocusOut == true){  //user pw matches or user exited password field AND all 5 reqs met
             confirmPassword()
             checkPassFail()   
         }
