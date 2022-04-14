@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="form.js"></script> 
+    <title>Sign Up Form</title>
+</head>
+<body>
+
+
+      
+    <div class="full-container">
+        <div class="left-container"> 
+            <div class='picture-text'>
+                <img src="https://cdn-icons-png.flaticon.com/512/3232/3232884.png" alt="Tent  free icon" title="Tent free icon" class="tent">
+                <p>CAMP</p>
+            </div>
+            <p class="photo-credit">Photo by <a href="https://unsplash.com/@evgenievgenief">Evgeni Evgeniev</a> on <a href="https://unsplash.com/photos/LPKk3wtkC-g">Unsplash</a></p>
+
+        </div>
+        <div class="right-container">
+            <div class="top-right-text">
+                <p>This is not a real place to sign up for camping excursions.</p>
+                <p>But, we would still recommend <em>you</em> sign up!</p>
+                <p>Sign up to get out and camp!</p>
+
+            </div>
+            <div class="form-inputs">
+                <form action="">
+                    <p>
+                        <label for="first_name">FIRST NAME</label>
+                        <input type="text" id="first_name" placeholder="John">
+                    </p>
+                    <p>
+                        <label for="last_name">LAST NAME</label>
+                        <input type="text" id="last_name" placeholder="Smith">
+                    </p>
+                    <p>
+                        <label for="email_address">EMAIL</label>
+                        <input type="email" id="email_address" placeholder="JohnSmith123@gmail.com" autocomplete="off">
+                    </p>
+
+                    <p>
+                        <label for="phone_number">PHONE NUMBER</label>
+                        <input type="tel" id="PHONE_NUMBER" placeholder="6085551234">
+                    </p>
+
+                    <p>
+                        <label for="password">PASSWORD</label>
+                        <input type="password" id="password" autocomplete="off">
+                    </p>
+
+                    <p>
+                        <label for="confirm_password">CONFIRM PASSWORD</label>
+                        <input type="password" id="confirm_password" autocomplete="off">
+                    </p>
+                    
+                    <div class="password-reqs" id="password_reqs">
+                        
+                        <p class="char-min" id="char_min">8 or More Total Characters</p>
+                        <p class="one-upper" id="one_upper">1 or More Uppercase Characters</p>
+                        <p class="one-lower" id="one_lower">1 or More Lowercase Characters</p>
+                        <p class="one-num" id="one_num">1 or More Numbers</p>
+                        <p class="one-special" id="one_special">1 or More Special Characters</p>
+                    </div>
+                    <div class="password-confirm"> <!-- here to balance flexbox for cleaner small screen resizing-->
+                        <p id="password_match"> </p>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="bottom-right-text">
+                    <button>Create Account</button>
+                    <p>Already have an Account? <a href="">Log In</a></p>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
+
+
+     
