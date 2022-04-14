@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script src="form.js"></script> 
+    <link rel="stylesheet" href="styles.css"> 
     <title>Sign Up Form</title>
 </head>
 <body>
@@ -84,5 +83,115 @@
 </body>
 </html>
 
+<script>
+
+
+let reqsMet;
+    let passwordCompleted = false; //has used entered password field and exited
+/*password input field event listeners */
+    document.getElementById('password').addEventListener('keyup', checkPass)
+    document.getElementById('password').addEventListener('focusout', checkPassFail)
+/*confirm password input field event listeners */
+    let confirmPasswordElement = document.getElementById('confirm_password')
+    document.getElementById('confirm_password').addEventListener('focusout', confirmPassword)
+    document.getElementById('confirm_password').addEventListener('keyup', confirmPasswordComplete)
+/* runs when confirm password input box focusout */    
+    function confirmPassword() {
+        let passwordText = document.getElementById('password').value
+        let confirmPasswordText = document.getElementById('confirm_password').value
+        let passwordMatch = document.getElementById('password_match')
+        if( passwordText === confirmPasswordText && reqsMet == 5){ 
+            pwPass(passwordMatch)
+            passwordMatch.textContent = "Passwords Match!"
+        }else if (reqsMet < 5 && passwordCompleted == true){
+            pwFail(passwordMatch)
+            passwordMatch.textContent = "Password Requirements Not Met"
+
+        }            
+        else{
+            pwFail(passwordMatch) 
+            passwordMatch.textContent = "Passwords Do Not Match"            
+        }
+    }
+
+/* add and remove classes for confirm password innput box */
+    function pwFail(passwordMatch){
+        confirmPasswordElement.classList.remove("input-passes")
+        confirmPasswordElement.classList.add("input-fails")
+        passwordMatch.classList.add('fails')
+        passwordMatch.classList.remove('passes')  
+    }
+    function pwPass(passwordMatch){
+        confirmPasswordElement.classList.add("input-passes")
+        confirmPasswordElement.classList.remove("input-fails")
+        passwordMatch.textContent = "Passwords Match!"
+        passwordMatch.classList.add('passes')
+        passwordMatch.classList.remove('fails')        
+    }
+
+
+/* checks confirm password input to alert when passwords match - on keyup*/
+    function confirmPasswordComplete() {
+
+
+        let passwordText = document.getElementById('password').value 
+        let confirmPasswordText = document.getElementById('confirm_password').value
+        let passwordMatch = document.getElementById('password_match')
+        if( passwordText === confirmPasswordText || passwordCompleted == true && reqsMet == 5){  //user pw matches or user exited password field AND all 5 reqs met
+            confirmPassword()
+            checkPassFail()   
+        }
+        if (passwordText == ""){
+            passwordCompleted=true;
+            checkPassFail();
+            confirmPassword()
+        } 
+        
+    }
+
+
+
+
+/* confirms password requirements */
+    
+    function checkPass(){         
+        let passInputText = document.getElementById('password').value    
+        let characterMin = document.getElementById("char_min")    
+        let oneNum = document.getElementById("one_num")    
+        let oneUpper = document.getElementById("one_upper")    
+        let oneLower = document.getElementById("one_lower")    
+        let oneSpecial = document.getElementById("one_special")    
+        const numRegex = /(\d)/g    
+        const lowRegex = /([a-z])/g    
+        const upRegex = /([A-Z])/g    
+        const specialRegex = /([^\w\s]|_)/g    
+        passInputText.length >= 8 ? characterMin.classList.add("passes") : characterMin.classList.remove("passes")    
+        passInputText.match(numRegex) ? oneNum.classList.add("passes") : oneNum.classList.remove("passes")    
+        passInputText.match(lowRegex) ? oneLower.classList.add("passes") : oneLower.classList.remove("passes")    
+        passInputText.match(upRegex) ? oneUpper.classList.add("passes") : oneUpper.classList.remove("passes")    
+        passInputText.match(specialRegex) ? oneSpecial.classList.add("passes") : oneSpecial.classList.remove("passes")   
+        if (passwordCompleted == true) {checkPassFail()
+        confirmPassword()}
+    }
+    
+     
+/* adds and removes classes for passing and failing the requirements list*/
+    function checkPassFail(){   
+        reqsMet = 0  
+        passwordCompleted = true;
+        let passChecks = document.getElementById('password_reqs').children;
+        Array.from(passChecks).forEach(check => {    
+            if(!check.classList.contains("passes")){    
+                check.classList.add("fails")
+                reqsMet--;
+            }
+            else{check.classList.remove("fails");
+                reqsMet++
+            }
+        })
+    }
+       
+     
+</script>
 
      
